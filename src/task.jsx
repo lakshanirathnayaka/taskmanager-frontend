@@ -30,7 +30,7 @@ function TaskDashboard({ onLogout, user }) {
       setLoading(true);
       setError("");
 
-      let url = `http://localhost:5000/tasks`;
+      let url = `${process.env.REACT_APP_BACKEND_URL}//tasks`;
       const headers = {
         "Authorization": `Bearer ${user.token}`
       };
@@ -79,7 +79,7 @@ function TaskDashboard({ onLogout, user }) {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user.token}` }
       });
@@ -97,7 +97,7 @@ function TaskDashboard({ onLogout, user }) {
   const toggleTaskStatus = async (task) => {
     try {
       const updatedStatus = !task.completed;
-      const res = await fetch(`http://localhost:5000/tasks/${task.task_id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${task.task_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${user.token}` },
         body: JSON.stringify({ ...task, completed: updatedStatus }),
@@ -180,12 +180,12 @@ function TaskDashboard({ onLogout, user }) {
       };
       if (editingId) {
         // Update existing task
-         res = await fetch(`http://localhost:5000/tasks/${editingId}`, {
+         res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${editingId}`, {
           method: "PUT", headers, body: JSON.stringify(taskData),
         }); 
       } else {
         // Create new task
-         res = await fetch("http://localhost:5000/tasks", {
+         res = await fetch("${process.env.REACT_APP_BACKEND_URL}//tasks", {
           method: "POST", headers, body: JSON.stringify(taskData),
         });
       }

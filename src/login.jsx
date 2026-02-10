@@ -26,7 +26,7 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("${process.env.REACT_APP_BACKEND_URL}//login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -61,7 +61,7 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/reset-password", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/reset-password`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: resetEmail, new_password: newPassword }),
