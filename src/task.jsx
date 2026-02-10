@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Calendar, MapPin, Clock, Pencil, Trash2, Plus, LogOut, X, Search, CheckCircle } from "lucide-react";
 
 function TaskDashboard({ onLogout, user }) {
@@ -23,14 +23,14 @@ function TaskDashboard({ onLogout, user }) {
   const completedTasks = tasks.filter((task) => task.completed).length;
 
   // Fetch tasks
-  const fetchTasks = async (type = null, query = "") => {
+  const fetchTasks = useCallback(async (type = null, query = "") => {
     if (!user) return;
 
     try {
       setLoading(true);
       setError("");
 
-      let url = `${process.env.REACT_APP_BACKEND_URL}//tasks`;
+      let url = `${process.env.REACT_APP_BACKEND_URL}/tasks`;
       const headers = {
         "Authorization": `Bearer ${user.token}`
       };
@@ -64,7 +64,7 @@ function TaskDashboard({ onLogout, user }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -72,14 +72,14 @@ function TaskDashboard({ onLogout, user }) {
     } else {
       setTasks([]);
     }
-  }, [user]);
+  }, [user, fetchTasks]);
 
   // Delete task
   const deleteTask = async (id) => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user.token}` }
       });
@@ -97,7 +97,7 @@ function TaskDashboard({ onLogout, user }) {
   const toggleTaskStatus = async (task) => {
     try {
       const updatedStatus = !task.completed;
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${task.task_id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${task.task_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${user.token}` },
         body: JSON.stringify({ ...task, completed: updatedStatus }),
@@ -180,12 +180,12 @@ function TaskDashboard({ onLogout, user }) {
       };
       if (editingId) {
         // Update existing task
-         res = await fetch(`${process.env.REACT_APP_BACKEND_URL}//tasks/${editingId}`, {
+         res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${editingId}`, {
           method: "PUT", headers, body: JSON.stringify(taskData),
         }); 
       } else {
         // Create new task
-         res = await fetch("${process.env.REACT_APP_BACKEND_URL}//tasks", {
+         res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks`, {
           method: "POST", headers, body: JSON.stringify(taskData),
         });
       }

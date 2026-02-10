@@ -26,7 +26,7 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
     setError("");
 
     try {
-      const res = await fetch("${process.env.REACT_APP_BACKEND_URL}//login", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -283,7 +283,7 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
 
         {/* Copyright */}
         <p className="text-center text-xs text-gray-400 mt-6">
-          © 2025 Task App. All rights reserved.
+          © 2026 Task App. All rights reserved.
         </p>
       </Card>
     </div>
