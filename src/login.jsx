@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import Card from "./card";
-import { useGoogleLogin } from '@react-oauth/google';
+
 
 function Login({ onLoginSuccess, onSwitchToSignup }) {
   const [formData, setFormData] = useState({
