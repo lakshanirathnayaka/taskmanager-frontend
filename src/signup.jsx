@@ -186,16 +186,15 @@ function Signup({ onSwitchToLogin, onLoginSuccess }) {
         {/* Footer */}
         <p className="text-center text-sm mt-8 text-gray-600">
           Already have an account?{" "}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
+          <button
+            type="button"
+            onClick={() => {
               onSwitchToLogin();
             }}
-            className="text-blue-600 font-semibold hover:underline"
+            className="text-blue-600 font-semibold hover:underline bg-transparent border-none cursor-pointer p-0"
           >
             Log in
-          </a>
+          </button>
         </p>
 
         {/* Copyright */}

@@ -242,17 +242,16 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
               <input type="checkbox" className="rounded w-4 h-4" />
               <span className="text-gray-900">Remember me</span>
             </label>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
+            <button
+              type="button"
+              onClick={() => {
                 setResetEmail(formData.email);
                 setIsForgotPassword(true);
               }}
-              className="text-blue-600 hover:underline font-medium"
+              className="text-blue-600 hover:underline font-medium bg-transparent border-none cursor-pointer p-0"
             >
               Forgot password?
-            </a>
+            </button>
           </div>
 
           {/* Button */}
@@ -269,16 +268,15 @@ function Login({ onLoginSuccess, onSwitchToSignup }) {
         {/* Footer */}
         <p className="text-center text-sm mt-8 text-gray-600">
           Don't have an account?{" "}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
+          <button
+            type="button"
+            onClick={() => {
               onSwitchToSignup();
             }}
-            className="text-blue-600 font-semibold hover:underline"
+            className="text-blue-600 font-semibold hover:underline bg-transparent border-none cursor-pointer p-0"
           >
             Sign up
-          </a>
+          </button>
         </p>
 
         {/* Copyright */}
