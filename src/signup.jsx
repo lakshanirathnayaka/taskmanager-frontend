@@ -81,7 +81,7 @@ function Signup({ onSwitchToLogin, onLoginSuccess }) {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-blue-50 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md min-h-screen sm:min-h-0">
         
         {/* Icon */}
@@ -173,16 +173,6 @@ function Signup({ onSwitchToLogin, onLoginSuccess }) {
             {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
-
-        {/* Divider */}
-        <div className="flex items-center my-6">
-          <div className="flex-grow border-t border-gray-200" />
-          <span className="mx-4 text-sm text-gray-400">Or continue with</span>
-          <div className="flex-grow border-t border-gray-200" />
-        </div>
-
-        
-
         {/* Footer */}
         <p className="text-center text-sm mt-8 text-gray-600">
           Already have an account?{" "}
